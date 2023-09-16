@@ -7,7 +7,7 @@ export const categoria = sequelize.define(
     'categorias',
     {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        nombre: { type: DataTypes.STRING },
+        nombre: { type: DataTypes.STRING,  allowNull: false, Comment: 'nombre' },
         usuario_id: { type: DataTypes.INTEGER }
 
     }

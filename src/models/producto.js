@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from "../database/database.js";
 import { categoria } from './categoria.js';
-import { usuario } from './usuario.js';
+import { usuario }  from './usuario.js';
 
 export const producto = sequelize.define(
     'productos',
@@ -13,8 +13,12 @@ export const producto = sequelize.define(
         categoria_id: { type: DataTypes.INTEGER },
         usuario_id: { type: DataTypes.INTEGER }
 
+    },
+    {
+        timestamps: false
+
     }
-)
+);
 
 producto.hasMany(categoria, {
     foreignKey: 'categoria_id',
