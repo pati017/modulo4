@@ -1,9 +1,9 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from "../database/database.js";
-import { producto} from './producto.js';
-import { categoria} from './categoria.js';
+import  {producto} from './producto.js';
+import  {categoria}  from './categoria.js';
 
-export const usuario = sequelize.define(
+export const  usuario = sequelize.define(
     'usuarios',
     {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -18,23 +18,23 @@ export const usuario = sequelize.define(
     }
 );
 
-//usuario.hasMany(producto, {
-//    foreingKey: 'usuario_id',
-//    sourceKey: 'id'
-//});
+usuario.hasMany(producto, {
+    foreingKey: 'usuario_id',
+    sourceKey: 'id'
+});
 
-//producto.belongsTo(usuario, {
-//    foreingKey: 'usuario_id',
-//    targeId: 'id'
-//});
+producto.belongsTo(usuario, {
+    foreingKey: 'usuario_id',
+    targeId: 'id'
+});
 
-//usuario.hasMany(categoria, {
-//    foreingKey: 'usuario_id',
-//    sourceKey: 'id'
-//});
+usuario.hasMany(categoria, {
+    foreingKey: 'usuario_id',
+    sourceKey: 'id'
+});
 
-//categoria.belongsTo(usuario, {
-//    foreingKey: 'usuario_id',
-//    targeId: 'id'
-//});
+categoria.belongsTo(usuario, {
+    foreingKey: 'usuario_id',
+    targeId: 'id'
+});
 

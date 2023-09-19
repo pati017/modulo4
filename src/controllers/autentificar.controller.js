@@ -1,5 +1,5 @@
 import bcryptjs from 'bcryptjs';
-import Usuario from '../models/usuarios.js';
+import {usuario} from '../models/usuario.js';
 import { generarToken } from '../utils/generar.token.js';
 
 
@@ -9,8 +9,8 @@ const login = async (req, res) => {
 
     try {
 
-        const usuario = await Usuario.findOne({ where: { correo } });
-        const validarContrasena = bcryptjs.compareSync(contrasena, usuario.contrasena);
+        const user = await usuario.findOne({ where: { correo } });
+        const validarContrasena = bcryptjs.compareSync(contrasena, user.contrasena);
         if (!validarContrasena) {
             return res.status(400).json({
                 msg: 'La contraseña no es correcto.'
@@ -18,7 +18,7 @@ const login = async (req, res) => {
         }
 
 
-        const token = await generarToken(usuario.correo, usuario.contrasena);
+        const token = await generarToken(user.correo, user.contrasena);
 
         res.json({
             token

@@ -3,7 +3,7 @@ import { check } from "express-validator";
 import { valdidarCampos } from "../middlewares/validaciones.js";
 import validarToken from "../middlewares/validar.token.js";
 import {existeUsuarioPorId} from "../utils/validaciones.bd.js"
-import { getUsers, createUser, getUser, updateUser,getAllCategoAndProduct} from "../controllers/usuario.controller.js";
+import { getUsers, createUser, getUser, updateUser,getAllCategoAndProduct} from "../controllers/usuario.constroller.js";
 
 const router = Router();
 

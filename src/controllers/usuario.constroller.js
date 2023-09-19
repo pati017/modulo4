@@ -1,8 +1,8 @@
 
 import bcryptjs from 'bcryptjs'
-import { producto } from '../models/producto.js';
-import { categoria } from  '../models/categoria.js';
-import { usuario } from '../models/usuario.js';
+import  {producto}  from '../models/producto.js';
+import  {categoria}  from  '../models/categoria.js';
+import  {usuario}  from '../models/usuario.js';
 
 const getUsers = async (req, res) => {
     try {
@@ -21,10 +21,10 @@ const createUser = async (req, res) => {
 
     try {
 
-        const usuario = req.body;
+        const user = req.body;
         const salt = bcryptjs.genSaltSync();
-        usuario.contrasena = bcryptjs.hashSync(usuario.contrasena, salt);
-        let newUsuario = await usuario.create(usuario,
+        user.contrasena = bcryptjs.hashSync(user.contrasena, salt);
+        let newUsuario = await usuario.create(user,
             {
                 fields: ["nombre", "correo", "contrasena", "estado"],
             }
@@ -41,12 +41,12 @@ const createUser = async (req, res) => {
 const getUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const usuario = await usuario.findOne({
+        const usuarios = await usuario.findOne({
             where: {
                 id,
             },
         });
-        res.json(usuario);
+        res.json(usuarios);
     } catch (error) {
         res.status(500).json({
             message: error.message,
@@ -64,14 +64,14 @@ const updateUser = async (req, res) => {
             resto.contrasena = bcryptjs.hashSync(contrasena, salt);
         }
 
-        const usuario = await Usuario.findByPk(id);
-        usuario.nombre = resto.nombre.toUpperCase();
-        usuario.correo = resto.correo;
-        usuario.contrasena = resto.contrasena;
-        usuario.estado = resto.estado;
-        await usuario.save();
+        const usuarios = await usuario.findByPk(id);
+        usuarios.nombre = resto.nombre.toUpperCase();
+        usuarios.correo = resto.correo;
+        usuarios.contrasena = resto.contrasena;
+        usuarios.estado = resto.estado;
+        await usuarios.save();
 
-        res.json(usuario);
+        res.json(usuarios);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -80,7 +80,7 @@ const updateUser = async (req, res) => {
 const deleteUser=async (req, res) =>{
   const { id } = req.params;
   try {
-    const usuario = await usuario.findByPk(id);
+    const usuarios = await usuario.findByPk(id);
   
 
     return res.sendStatus(204);
@@ -92,7 +92,7 @@ const deleteUser=async (req, res) =>{
 const getAllCategoAndProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const usuario = await usuario.findAll({
+        const usuarios = await usuario.findAll({
             where: { id: id },
             attributes: {
                 exclude: ['id', 'contrasena', 'estado']
@@ -109,7 +109,7 @@ const getAllCategoAndProduct = async (req, res) => {
             ]
 
         });
-        res.json(usuario);
+        res.json(usuarios);
     } catch (error) {
         res.status(500).json({
             message: error.message,

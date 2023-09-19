@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
-import usuario from '../models/usuario.js'
+import {usuario} from '../models/usuario.js'
+import dotenv from "dotenv";
+dotenv.config();
 const validarToken = async (req, res, next) => {
     const token = req.header("token")
     if (!token) {
@@ -9,19 +11,19 @@ const validarToken = async (req, res, next) => {
     }
 
     try {
-        const { correo } = jwt.verify(token, process.env.SECRETOR_KEY);
+        const { correo } = jwt.verify(token, process.env.KEY_SECRET);
         console.log("correo="+correo)
-        const usuario = await usuario.findOne({
+        const usuarios = await usuario.findOne({
             where: {
                 correo,
             },
         });
-        if (!usuario) {
+        if (!usuarios) {
             return res.status(401).json({
                 msg: 'Token no válido'
             })
         }
-        req.usuarios = usuario;
+        req.usuarios = usuarios;
         next();
     } catch (error) {
         res.status(401).json({

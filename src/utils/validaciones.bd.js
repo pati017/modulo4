@@ -1,11 +1,11 @@
 
-import Usuario from '../models/usuario.js'
-import Categoria from '../models/categoria.js'
-import Producto from '../models/producto.js'
+import {usuario} from '../models/usuario.js'
+import {categoria} from '../models/categoria.js'
+import { producto } from '../models/producto.js'
 
 const existeUsuarioPorId = async (id) => {
 
-    const existeUsuario = await Usuario.findOne({
+    const existeUsuario = await usuario.findOne({
         where: {
             id,
         }
@@ -18,7 +18,7 @@ const existeUsuarioPorId = async (id) => {
 const correoNoExiste = async (correo) => {
 
 
-    const existeEmail = await Usuario.findOne({ where: { correo } });
+    const existeEmail = await usuario.findOne({ where: { correo } });
     if (!existeEmail) {
         throw new Error(`El correo: ${correo}, no existe.`);
     }
@@ -26,7 +26,7 @@ const correoNoExiste = async (correo) => {
 const correoExiste = async (correo = '') => {
 
 
-    const existeEmail = await Usuario.findOne({ where: { correo } });
+    const existeEmail = await usuario.findOne({ where: { correo } });
     if (existeEmail) {
         throw new Error(`El correo: ${correo}, ya está registrado`);
     }
@@ -34,7 +34,7 @@ const correoExiste = async (correo = '') => {
 
 const existeUsuarioPorIdParaAsignar = async (id) => {
     if (id) {
-        const existeUsuario = await Usuario.findOne({
+        const existeUsuario = await usuario.findOne({
             where: {
                 id,
             }
@@ -46,7 +46,7 @@ const existeUsuarioPorIdParaAsignar = async (id) => {
 }
 const existeCategoriaPorId = async (id) => {
 
-    const existeCategoria = await Categoria.findOne({
+    const existeCategoria = await categoria.findOne({
         where: {
             id,
         }
@@ -60,7 +60,7 @@ const existeCategoriaPorId = async (id) => {
 
 const existeProductoPorId = async (id) => {
 
-    const existeProducto = await Producto.findOne({
+    const existeProducto = await producto.findOne({
         where: {
             id,
         }

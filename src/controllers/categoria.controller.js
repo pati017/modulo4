@@ -1,12 +1,12 @@
 
 
-import Categoria from '../models/categoria.js'
+import {categoria} from '../models/categoria.js'
 
 const createCategoria = async (req, res) => {
 
     try {
         const nombre_categoria = req.body.nombre.toUpperCase();
-        const categoria = await Categoria.findOne({
+        const categoria = await categoria.findOne({
             where: {
                 nombre: nombre_categoria,
             },
@@ -20,7 +20,7 @@ const createCategoria = async (req, res) => {
             nombre: nombre_categoria,
             UsuarioId: req.Usuarios.id
         }
-        let newCategoria = await Categoria.create(data,
+        let newCategoria = await categoria.create(data,
             {
                 fields: ["nombre", "UsuarioId"],
             }
@@ -36,7 +36,7 @@ const createCategoria = async (req, res) => {
 
 const getCategorias = async (req, res) => {
     try {
-        const categorias = await Categoria.findAll({
+        const categorias = await categoria.findAll({
             atributes: ["nombre"],
         });
         res.json(categorias);
@@ -50,7 +50,7 @@ const getCategorias = async (req, res) => {
 const getCategoria = async (req, res) => {
     const { id } = req.params;
     try {
-        const categoria = await Categoria.findOne({
+        const categoria = await categoria.findOne({
             where: {
                 id,
             },
@@ -68,7 +68,7 @@ const updateCategoria = async (req, res) => {
         const { id } = req.params;
         const { ...resto } = req.body;
 
-        const categoria = await Categoria.findByPk(id);
+        const categoria = await categoria.findByPk(id);
         categoria.nombre = resto.nombre.toUpperCase();
         categoria.UsuarioId = resto.UsuarioId;
         await categoria.save();
@@ -82,7 +82,7 @@ const deleteCategoria = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const categoria = await Categoria.destroy({
+        const categoria = await categoria.destroy({
             where: {
                 id,
             },

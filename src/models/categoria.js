@@ -1,24 +1,24 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from "../database/database.js";
-import { usuario } from './usuario.js';
+import  {producto} from './producto.js';
 
 
 export const categoria = sequelize.define(
     'categorias',
     {
         id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-        nombre: { type: DataTypes.STRING,  allowNull: false, Comment: 'nombre' },
-        usuario_id: { type: DataTypes.INTEGER }
+        nombre: { type: DataTypes.STRING,  allowNull: false, Comment: 'nombre' }
 
     }
 )
 
-categoria.hasMany(usuario, {
-    foreignKey: 'usuario_id',
+categoria.hasMany(producto, {
+    foreignKey: 'categoria_id',
     sourceKey: 'id'
 });
 
-usuario.belongsTo(categoria, {
-    foreignKey: 'usuario_id',
+producto.belongsTo(categoria, {
+    foreignKey: 'categoria_id',
     targetKey: 'id',
 });
+

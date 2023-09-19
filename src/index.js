@@ -7,7 +7,7 @@ dotenv.config();
 
 async function main(){ 
     console.clear();
-    app = express();
+    //app = express();
     await sequelize.sync();
     const PORT = process.env.PORT;
     app.listen(PORT);
