@@ -70,4 +70,4 @@ const existeProductoPorId = async (id) => {
     }
 }
 
-export { existeUsuarioPorId, correoNoExiste, correoExiste, existeCategoriaPorId, existeUsuarioPorIdParaAsignar }
+export { existeUsuarioPorId, correoNoExiste, correoExiste, existeCategoriaPorId, existeUsuarioPorIdParaAsignar, existeProductoPorId }
