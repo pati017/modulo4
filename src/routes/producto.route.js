@@ -11,7 +11,7 @@ const router = new Router();
 
 router.get('/', getProductos);
 
-router.post('/');
+router.post('/', createProducto);
 
 router.put('/:id');
 
